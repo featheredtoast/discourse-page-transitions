@@ -43,7 +43,6 @@
 }
 ::view-transition-group(main) {
   // disable view transition group that scrolls/scales
-    transition: none;
   animation: 0ms;
 }
 
