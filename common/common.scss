@@ -14,12 +14,10 @@
 @keyframes slide-to-left {
   to { transform: translateX(-30px); }
 }
-@view-transition {
-  navigation: auto;
-}
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 300ms;
+
 }
 
 ::view-transition-group(loading),
@@ -43,12 +41,22 @@
 .d-header {
   view-transition-name: header;
 }
+::view-transition-group(main) {
+  // disable view transition group that scrolls/scales
+    transition: none;
+  animation: 0ms;
+}
+
 ::view-transition-new(main) {
-  animation: 300ms cubic-bezier(0, 0, 0.2, 1) both fade-in,
-  300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+    animation: 300ms cubic-bezier(0, 0, 0.2, 1) both fade-in,
+    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+}
+html {
+  --vt-scroll-y-old: 0px;
 }
 ::view-transition-old(main) {
-  animation: 150ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+  top: var(--vt-scroll-y-old);
+    animation: 150ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
     300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
 }
 #main-outlet {
